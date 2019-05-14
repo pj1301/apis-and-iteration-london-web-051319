@@ -8,11 +8,22 @@ def get_character_movies_from_api(character_name) # WORKS
    response_hash = JSON.parse(response_string)
    film_array = []
    film_urls = []
-   response_hash["results"].each do |characters|
-      if character_name == characters["name"].downcase
-         film_urls = characters["films"]
-      else 
-         nil
+   # experimental code
+   names = []
+   response_hash["results"].each do |object|
+      names << object.fetch("name").downcase
+   end
+   if names.include?(character_name.downcase) == false
+      puts "This character does not exist."
+      # binding. pry
+   else
+      #experimental code
+      response_hash["results"].each do |characters|
+         if character_name == characters["name"].downcase
+            film_urls = characters["films"]
+         else
+            nil
+         end
       end
    end
    film_urls
