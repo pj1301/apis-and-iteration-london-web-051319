@@ -14,13 +14,12 @@ def get_character_movies_from_api(character_name)
    else 
       nil
    end
+end
    film_array[0].each do |film_url|
       film_array_response_string = RestClient.get(film_url)
       collected_films << film_array_response_hash = JSON.parse(film_array_response_string)
    end
    collected_films
-end
-
 # iterate over the response hash to find the collection of `films` for the given
 #   `character` – DONE
 # collect those film API urls, make a web request to each URL to get the info
@@ -32,20 +31,18 @@ end
 #  of movies by title. Have a play around with the puts with other info about a given film.
 end
 
-def print_movies(films) # take all movies then delete duplicates
+def print_movies(films) 
    # some iteration magic and puts out the movies in a nice list
-   response_string = RestClient.get('http://www.swapi.co/api/people/')
-   response_hash = JSON.parse(response_string)
    # response_hash.each do |details|
    #    response_hash[details]
-   puts film_array
+   puts films
 end
 
-binding.pry
 # binding.pry 
 def show_character_movies(character)
-  films = get_character_movies_from_api(character)
-  print_movies(films)
+   films = get_character_movies_from_api(character)
+     print_movies(films)
+   # binding.pry
 end
 
 ## BONUS
